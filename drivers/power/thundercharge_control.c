@@ -25,16 +25,12 @@
 #define MAX_VBUS_CURRENT    1500
 #define THUNDERCHARGE       "thundercharge"
 
-<<<<<<< HEAD
-#define DRIVER_VERSION  1
-=======
 int mswitch = ENABLED;
 int custom_ac_current = AC_CURRENT;
 int custom_usb_current = USB_CURRENT;
 
 #define DRIVER_VERSION  2
->>>>>>> 827a39a... thundercharge control v2.0
-#define DRIVER_SUBVER 0
+#define DRIVER_SUBVER 1
 
 static ssize_t mswitch_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
 {
@@ -66,15 +62,6 @@ static ssize_t cust_ac_current_show(struct kobject *kobj, struct kobj_attribute 
 
 static ssize_t cust_usb_current_store(struct kobject *kobj, struct kobj_attribute *attr, const char *buf, size_t count)
 {
-<<<<<<< HEAD
-int newcurr;
-sscanf(buf, "%d", &newcurr);
-if(mswitch==1)
-custom_current = newcurr;
-else
-pr_info("Main switch disabled, neglecting values\n");
-return count;
-=======
 	int newcurr;
 	sscanf(buf, "%d", &newcurr);
 	if(mswitch == 1 && newcurr <= MAX_VBUS_CURRENT)
@@ -98,7 +85,6 @@ static ssize_t cust_ac_current_store(struct kobject *kobj, struct kobj_attribute
 	else
 		pr_info("%s: disabled or limit reached, ignoring\n", THUNDERCHARGE);
 	return count;
->>>>>>> 827a39a... thundercharge control v2.0
 }
 
 static ssize_t chgr_ver_show(struct kobject *kobj, struct kobj_attribute *attr, char *buf)
